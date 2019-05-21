@@ -1,0 +1,17 @@
+﻿READ ME- Datatset S1 associated to 'Biodiversity-ecosystem functioning relationships in demersal fish communities: biomass is related to evenness, not to species richness'
+
+# Column 1: 'cell' - grid cell identification number
+# Column 2: 'longitude' - longitude
+# Column 3: 'latitude' - latitude
+# Column 4: 'biomass' - total biomass per grid cell in tonnes/hour fishing
+# Column 5: 'sr' - standardized species richness per grid cell
+# Column 6: 'evesimpson' - Simpson´s evenness
+# Column 7: 'jac' - Jaccard beta-diversity based on presence-absence of species (dissimilarity)
+# Column 8: 'depth' - Depth in meters
+# Column 9: 'sst.sea' - seasonality of sea surface temperature (unitless)
+# Column 10: 'sst' - mean sea surface temperature in degrees celsius 
+# Column 11: 'chl' - mean chlorophyll a concentration in mg/m3/day
+# Column 12: 'pielou.sed' - Pielou evenness of seafloor diversity
+# Column 13: 'effort' - Fishing effort from the Global Fishing Watch in kWh/year
+# Column 14: 'feeding.mode_benthivorous' - Community Weighted Mean of species feeding mode, category benthivorous
+# Column 15: 'tl' - trophic level Community Weighted Mean
