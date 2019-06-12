@@ -16,7 +16,6 @@ library(marmap)
 # Load Data
 dat <- read.csv(file='Dataset_S1.csv')
 
-
 # Create the grid
 gt<-(GridTopology(c(-60.25, 30.25), c(0.5,0.5), c(200, 120))) 
 grt<-SpatialGrid(gt, proj4string=CRS("+init=epsg:4326"))
@@ -142,6 +141,7 @@ abline(lm0, col='black', lwd=5)
 #####################################################################################################
 #### 3A. PIECEWISE SEM MODEL WITH BIOMASS, EVENNESS, RICHNESS AND JACCARD DISSIMILARITY WITH NEW DATA
 #####################################################################################################
+
 library(rgdal)
 library(sp)
 library(reshape2)
@@ -166,8 +166,8 @@ dat$evesimpson <- log(dat$evesimpson)
 # Squared term
 dat$jac.c <- (dat$jac-mean(dat$jac))^2
 
-# Separate relationships
-gls.b <- gls(biomass ~ evesimpson + jac.c + sst + sst.sea + chl + pielou.sed, data=dat, correlation=corExp(form= ~ long+lat))
+# Separate relationships - corresponds to results1
+gls.b <- gls(biomass ~ evesimpson + jac.c + sst  + chl + pielou.sed + sst.sea + sr + jac, data=dat, correlation=corExp(form= ~ long+lat))
 gls.j <- gls(jac ~ depth + sst.sea + chl, data=dat, correlation=corGaus(form= ~ long+lat))
 gls.e <- gls(evesimpson ~ depth + pielou.sed, data=dat, correlation=corRatio(form= ~long+lat))
 gls.sr <- gls(sr ~ sst.sea + pielou.sed + chl, data=dat, correlation=corExp(form= ~ long+lat))
@@ -180,8 +180,8 @@ modelList <- psem(
   gls.e,
   gls.b,
   jac %~~% sr,
-  evesimpson %~~% jac,
   evesimpson %~~% sr,
+  jac %~~% evesimpson,
   jac.c %~~% jac,
   jac.c %~~% evesimpson,
   jac.c %~~% sr,
@@ -189,6 +189,7 @@ modelList <- psem(
 )
 
 results <- summary(modelList)
+
 rsq <- rsquared(modelList)
 results$IC$AIC
 results$dTable
@@ -216,7 +217,7 @@ dat$effort <- log(dat$effort)
 dat$jac.c <- (dat$jac-mean(dat$jac))^2
 
 # Separate models
-gls.b <- gls(biomass ~ evesimpson + jac.c + sst + sst.sea + chl + pielou.sed + effort, data=dat, correlation=corExp(form= ~ long+lat))
+gls.b <- gls(biomass ~ evesimpson + jac.c + sst + sst.sea + chl + pielou.sed + effort + sr + jac, data=dat, correlation=corExp(form= ~ long+lat))
 gls.j <- gls(jac ~ depth + sst.sea + chl, data=dat, correlation=corGaus(form= ~ long+lat))
 gls.e <- gls(evesimpson ~ depth + pielou.sed, data=dat, correlation=corRatio(form= ~long+lat))
 gls.sr <- gls(sr ~ sst.sea + pielou.sed + chl, data=dat, correlation=corExp(form= ~ long+lat))
@@ -235,6 +236,7 @@ modelList <- psem(
   jac.c %~~% sr,
   effort %~~% evesimpson,
   effort %~~% sr,
+  effort %~~% jac,
   dat
 )
 
