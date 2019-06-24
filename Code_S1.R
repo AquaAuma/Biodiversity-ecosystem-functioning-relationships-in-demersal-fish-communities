@@ -248,7 +248,7 @@ results <- summary(modelList)
 ######################################################################################
 
 ### gls models included in the SEM
-gls.b <- gls(biomass ~ evesimpson + jac.c + sst + sst.sea + chl + pielou.sed, data=dat, correlation=corExp(form= ~ long+lat))
+gls.b <- gls(biomass ~ evesimpson + jac.c + sst + sst.sea + chl + pielou.sed + sr + jac, data=dat, correlation=corExp(form= ~ long+lat))
 gls.j <- gls(jac ~ depth + sst.sea + chl, data=dat, correlation=corGaus(form= ~ long+lat))
 gls.e <- gls(evesimpson ~ chl + depth + pielou.sed, data=dat, correlation=corRatio(form= ~long+lat))
 gls.sr <- gls(sr ~ sst.sea + pielou.sed + chl, data=dat, correlation=corExp(form= ~ long+lat))
