@@ -40,7 +40,7 @@ map('worldHires', add=T, fill=T, col="black", xlim=c(-15,15), ylim=c(42,62))
 par(fig=c(0,0.2,0,0.9), mar = c(2,0,0.5,2), new=TRUE)
 legend_image <- grDevices::as.raster(matrix(rev(color2), ncol=1))
 plot(c(0,2),c(0,1),type = 'n', axes = F,xlab = '', ylab = '', main = '',cex.main=0.5)
-text(x=1.5, y = seq(0,1,l=3), labels = c(0.005,0.5,2.5), cex=1.2)
+text(x=1.5, y = seq(0,1,l=3), labels = c(0.01,0.6,3.6), cex=1.2)
 rasterImage(legend_image, 0, 0, 1,1)
 
 ### EVENNESS map
